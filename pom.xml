@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+ <modelVersion>4.0.0</modelVersion>
+
+ <artifactId>filebeat-flume-interceptor</artifactId>
+ <groupId>com.goibibo</groupId>
+ <version>0.1</version>
+ <packaging>jar</packaging>
+ <name>filebeat-flume-interceptor</name>
+
+ <properties>
+  <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  <flume.version>1.5.0</flume.version>
+</properties>
+
+<dependencies>
+  <dependency>
+    <groupId>org.apache.flume</groupId>
+    <artifactId>flume-ng-core</artifactId>
+    <version>${flume.version}</version>
+  </dependency>
+  <dependency>
+    <groupId>com.google.code.gson</groupId>
+    <artifactId>gson</artifactId>
+    <version>2.7</version>
+    <scope>compile</scope>
+  </dependency>
+  <dependency>
+    <groupId>org.apache.flume</groupId>
+    <artifactId>flume-ng-sdk</artifactId>
+    <version>${flume.version}</version>
+  </dependency>
+
+  <dependency>
+    <groupId>junit</groupId>
+    <artifactId>junit</artifactId>
+    <scope>test</scope>
+    <version>4.12</version>
+  </dependency>
+
+  <dependency>
+    <groupId>joda-time</groupId>
+    <artifactId>joda-time</artifactId>
+    <version>2.9.4</version>
+  </dependency>
+  
+
+</dependencies>
+
+<build>
+  <plugins>
+    <plugin>
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-compiler-plugin</artifactId>
+      <configuration>
+        <source>1.6</source>
+        <target>1.6</target>
+      </configuration>
+      <version>3.5.1</version>
+    </plugin>
+    <plugin>
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-assembly-plugin</artifactId>
+      <version>2.6</version>
+      <configuration>
+        <!-- get all project dependencies -->
+        <descriptorRefs>
+          <descriptorRef>jar-with-dependencies</descriptorRef>
+        </descriptorRefs>
+        <!-- MainClass in mainfest make a executable jar -->
+        <archive>
+          <manifest>
+            <mainClass>com.goibibo.filebeat_flume_interceptor.FilebeatInterceptor</mainClass>
+          </manifest>
+        </archive>
+
+      </configuration>
+      <executions>
+        <execution>
+          <id>make-assembly</id>
+          <phase>package</phase> 
+          <goals>
+            <goal>single</goal>
+          </goals>
+        </execution>
+      </executions>
+    </plugin>
+  </plugins>
+</build>
+
+</project>
